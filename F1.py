@@ -16,8 +16,8 @@ def index():
 
 @app.route("/api/austria")
 def austrianGP():
-    DBS_NAME = 'gp_finishes'
-    COLLECTION_NAME = 'austria'
+    DBS_NAME = 'heroku_bqvpfh1t'
+    COLLECTION_NAME = 'austriangp'
     FIELDS = {'Pos': True, 'No': True, 'Driver': True, 'Constructor': True, 'Laps': True, 'Grid': True, 'Time': True,
               'Status': True, 'Points': True, '_id': False}
     connection = MongoClient(MONGO_URI)
@@ -32,8 +32,8 @@ def austrianGP():
 
 @app.route("/api/qualy")
 def poleposition():
-    DBS_NAME = 'poleposition'
-    COLLECTION_NAME = 'data'
+    DBS_NAME = 'heroku_bqvpfh1t'
+    COLLECTION_NAME = 'poleposition'
     FIELDS = {'raceId': True, 'driverId': True, 'lap_time': True, 'surname': True, 'circuitId': True, 'date': True, 'Circuit': True, '_id': False}
     connection = MongoClient(MONGO_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
@@ -47,8 +47,8 @@ def poleposition():
 
 @app.route("/api/fastestlaps")
 def fastestlap():
-    DBS_NAME = 'fastestlap'
-    COLLECTION_NAME = 'laptime'
+    DBS_NAME = 'heroku_bqvpfh1t'
+    COLLECTION_NAME = 'fastestlaptimes'
     FIELDS = {'raceId': True, 'forename': True, 'min_lap_time': True, 'surname': True, 'circuitId': True, 'date': True, 'circuit': True, 'min_laptime': True, '_id': False}
     connection = MongoClient(MONGO_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
