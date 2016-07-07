@@ -5,8 +5,10 @@ import json
 
 app = Flask(__name__)
 
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = 27017
+MONGODB_HOST = 'ds015995.mlab.com'
+MONGODB_PORT = 15995
+DBS_NAME = 'heroku_bqvpfh1t'
+MONGO_URI = mongodb://root:95ke5312@ds015995.mlab.com:15995/heroku_bqvpfh1t
 
 @app.route('/')
 def index():
@@ -18,9 +20,9 @@ def austrianGP():
     COLLECTION_NAME = 'austria'
     FIELDS = {'Pos': True, 'No': True, 'Driver': True, 'Constructor': True, 'Laps': True, 'Grid': True, 'Time': True,
               'Status': True, 'Points': True, '_id': False}
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    connection = MongoClient(MONGO_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
-    projects = collection.  find(projection=FIELDS, limit=55000)
+    projects = collection.  find(projection=FIELDS, limit=20000)
     json_projects = []
     for project in projects:
         json_projects.append(project)
@@ -33,9 +35,9 @@ def poleposition():
     DBS_NAME = 'poleposition'
     COLLECTION_NAME = 'data'
     FIELDS = {'raceId': True, 'driverId': True, 'lap_time': True, 'surname': True, 'circuitId': True, 'date': True, 'Circuit': True, '_id': False}
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    connection = MongoClient(MONGO_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
-    data = collection.  find(projection=FIELDS, limit=55000)
+    data = collection.  find(projection=FIELDS, limit=20000)
     json_data = []
     for datum in data:
         json_data.append(datum)
@@ -48,9 +50,9 @@ def fastestlap():
     DBS_NAME = 'fastestlap'
     COLLECTION_NAME = 'laptime'
     FIELDS = {'raceId': True, 'forename': True, 'min_lap_time': True, 'surname': True, 'circuitId': True, 'date': True, 'circuit': True, 'min_laptime': True, '_id': False}
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    connection = MongoClient(MONGO_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
-    laptimes = collection.  find(projection=FIELDS, limit=55000)
+    laptimes = collection.  find(projection=FIELDS, limit=20000)
     json_laptimes = []
     for laptime in laptimes:
         json_laptimes.append(laptime)
