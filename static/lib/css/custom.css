@@ -1,45 +1,31 @@
+/***
+COLOURPALETTE
+#777 (navbar)
+#5bc0de (buttons)
 
+Classes and id
+navbar
+introjs-button
+.dc-select-menu
+.dc-chart
 
-#number-projects-nd {
-    font-size: 60px;
+***/
+.navbar {
+background: rgba(119,119,119,0.6);
 }
 
-#total-donations-nd {
-    font-size: 60px;
+.introjs-button:focus, .introjs-button:active {
+    background-image: none;
 }
+
+
 .dc-chart g.row text {
     fill: black;
     font-size:12px;
 }
 
-#total-projects {
-    background: #33cc99;
-    width: 200px;
-    position: relative;
-    height: 60px;
-    font-size: 29px;
-    color: white;
-    vertical-align: middle;
-    text-align: center;
-    padding-top: 12px;
-    padding-bottom: 0px;
-
-}
-#net-donations {
-    background: #33cc99;
-    width: 200px;
-    position: relative;
-    height: 60px;
-    font-size: 29px;
-    color: white;
-    vertical-align: middle;
-    text-align: center;
-    padding-top: 12px;
-    padding-bottom: 0px;
-}
-
 .dc-select-menu {
-    background: #33cc99;
+    background: #5bc0de;
     width: 80%;
     border: none;
     position: relative;
@@ -50,4 +36,8 @@
     text-align: center;
     padding-top: 4px;
     padding-bottom: 0px;
+}
+
+p {
+    color: white;
 }

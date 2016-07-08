@@ -2,12 +2,14 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>F1 Data Analysis App</title>
-    <link rel="stylesheet" href= {{url_for('static', filename='lib/css/bootstrap.min.css')}}>
+    <link rel="stylesheet" href= {{url_for('static', filename='lib/css/introjs.css')}}>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href= {{url_for('static', filename='lib/css/keen-dashboards.css')}}>
     <link rel="stylesheet" href= {{url_for('static', filename='lib/css/dc.css')}}>
     <link rel="stylesheet" href= {{url_for('static', filename='lib/css/custom.css')}}>
-    <link rel="stylesheet" href= {{url_for('static', filename='lib/css/introjs.css')}}>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -15,60 +17,56 @@
 
 <body class="application">
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="./">F1 Data Analysis App</a>
         </div>
-        <button class="introjs-button" autofocus onclick="javascript:introJs().start();">Click to begin</button>
+        <button type="button" class="introjs-button btn btn-info" autofocus onclick="javascript:introJs().start();">Click for details</button>
     </div>
-</div>
+</nav>
 
 <div id="outer" class="container-fluid">
     <div id="overlay"><br>
         </div>
 
     <div class="row">
-        <div class="col-sm-12">
-            <div class="row">
-
 
                 <div class="col-sm-6">
-                    <div class="chart-wrapper">
+                    <figure class="chart-wrapper">
                         <div class="chart-title">
                             Austrian GP 2016 points by constructor
                         </div>
                         <div class="chart-stage">
                             <div id="constructor-points-line" data-step="1"
-                                 data-intro="This bar chart shows the points scored by constructors."
+                                 data-intro="This line chart shows the points scored by constructors. Note Manor's first points."
                                  style="font-weight: normal" data-position="right"></div>
                         </div>
-                    </div>
+                    </figure>
                 </div>
 
-
                 <div class="col-sm-3">
-                    <div class="chart-wrapper">
+                    <figure class="chart-wrapper">
                         <div class="chart-title">
                              Status
                         </div>
                         <div class="chart-stage">
                             <div id="car-status-pie" data-step="2"
-                                 data-intro="This piechart displays the finishers and reasons for non-finishes."
+                                 data-intro="This piechart displays the finishers and reasons for non-finishes. Click a slice to see that constructor's results only."
                                  style="font-weight: normal" data-position="left"></div>
                         </div>
-                    </div>
+                    </figure>
                 </div>
-
-                <div class="row">
-        <div class="col-sm-12">
-            <div class="row">
-            <div class="col-sm-9">
-                        <div class="row">
+</div>
+    <div class="row">
 
 
-                            <div class="col-sm-12">
-                                <div class="chart-wrapper">
+
+
+
+
+                            <div class="col-sm-9">
+                                <figure class="chart-wrapper">
                                     <div class="chart-title">
                                         Boxplot of fastest laps by driver from 1996 to 2016
                                     </div>
@@ -77,45 +75,44 @@
                                              data-intro="This shows the trend of laptimes by year and the variance between drivers. As rules and technologies change laptimes change also. "
                                              style="font-weight: normal" data-position="right"></div>
                                     </div>
-                                </div>
+                                </figure>
                 </div>
-                            </div>
 
-            </div>
+
+
 
                <div class="col-sm-3">
-                    <div class="chart-wrapper">
+                    <menu class="chart-wrapper">
                         <div class="chart-title">
                              Filter boxplot by circuit
                         </div>
                         <div class="chart-stage">
                             <div id="circuit-select"></div>
                         </div>
-                    </div>
+                    </menu>
                 </div>
 
                 </div>
-            </div>
-                    </div>
+
+
                 <div class="row">
-        <div class="col-sm-12">
-            <div class="row">
+
               <div class="col-sm-6">
-                    <div class="chart-wrapper">
+                    <figure class="chart-wrapper">
                         <div class="chart-title">
                             Pole position Lap Times since 2006
                         </div>
                         <div class="chart-stage">
                             <div id="Q3-pole-line" data-step="4"
-                                 data-intro="Pole positions have changed as rules, circuit layouts and tecnologies have changed."
+                                 data-intro="Pole positions have changed as rules, circuit layouts and technologies have changed."
                                  style="font-weight: normal" data-position="right"></div>
                         </div>
-                    </div>
+                    </figure>
                 </div>
 
 
                 <div class="col-sm-3">
-                    <div class="chart-wrapper">
+                    <figure class="chart-wrapper">
                         <div class="chart-title">
                              Driver
                         </div>
@@ -124,39 +121,27 @@
                                  data-intro="This piechart shows the number of pole positions by driver. Click the driver to filter the linechart results."
                                  style="font-weight: normal" data-position="left"></div>
                         </div>
-                    </div>
+                    </figure>
                 </div>
                 <div class="col-sm-3">
-                    <div class="chart-wrapper">
+                    <menu class="chart-wrapper">
                         <div class="chart-title">
                              Filter Pole position by Circuit
                         </div>
                         <div class="chart-stage">
                             <div id="menu-select"></div>
                         </div>
-                    </div>
+                    </menu>
                 </div>
         </div>
             </div>
-                    </div>
-                </div>
 
-
-
-
-
-
-
-
-
-
-    </div>
 
     <hr>
-    <p class="small text-muted"></p>
+<footer>
+    <p class="small">Data visualisation <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> Niel M<sup>c</sup>Ewen. Developed with Ergast Developer API</p>
+</footer>
 
-</div>
-</div>
 
 <script src={{url_for ('static', filename='lib/js/jquery.min.js')}}></script>
 <script src={{url_for ('static', filename='lib/js/bootstrap.min.js')}}></script>

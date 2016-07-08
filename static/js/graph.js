@@ -16,17 +16,10 @@ function dovoodoo(error, points, laps, pole){
 }
 
 
-// queue()
-//     .defer(d3.json, "/api/austria")
-//     .await(makePoints);
-//
-// queue()
-//     .defer(d3.json, "/api/fastestlaps")
-//     .await(makeBoxplot);
-
 function makeBoxplot(error, Json) {
-    //Clean projectsJson data
+    //Clean Json data
     var laptimes = Json;
+    //Parse out a year from the db date format
     var parseDate = d3.time.format("%Y-%m-%d").parse;
     Json.forEach(function(d){
         d.date = parseDate(d.date);
@@ -34,7 +27,7 @@ function makeBoxplot(error, Json) {
         d.Driver = d.forename + " " + d.surname;
     });
 
-    //Create a Crossfilter instance
+    //Create a Crossfilter instance of the min laptimes posted by each driver in the race
     var ndx = crossfilter(laptimes),
         raceDimension = ndx.dimension(function(d) {return +d.Year;}),
         lapTimeArrayGroup = raceDimension.group().reduce(
@@ -50,7 +43,7 @@ function makeBoxplot(error, Json) {
                 return[];
             }
         );
-
+//Create a boxPlot
     var lapTimeChart = dc.boxPlot("#laptimes-boxplot-line");
 
     var circuitDim = ndx.dimension(function (d) {
@@ -140,7 +133,7 @@ function makePole(error, Json) {
         d.Year = d.date.getFullYear();
         d.milli = parseTime(d.lap_time);
     });
-
+//Function generates pole position laptime in milliseconds from db time format
     function parseTime(t) {
         var parts = t.split(":");
         var minutes = Math.floor(parts[0]);
@@ -205,111 +198,5 @@ function makePole(error, Json) {
 
     dc.renderAll();
 
-//
-    // // raceResults.forEach(function (d) {
-    // //     d["date_posted"] = date.Format.parse(d["date_posted"]);
-    // //     d["date_posted"].setDate(1);
-    // //     d["total_donations"] = +d["total_donations"];
-    // // });
-    //
-    //
-    // //Define Dimensions
-    // var positionDim = ndx.dimension(function (d) {
-    //     return d["Pos"];
-    // });
-    //     var raceNoDim = ndx.dimension(function (d) {
-    //     return d["No"];
-    // });
-    //     var lapsDim = ndx.dimension(function (d) {
-    //     return d["Laps"];
-    // });
-    // var nameDim = ndx.dimension(function (d) {
-    //     return d["Driver"];
-    // });
-    // var gridDim = ndx-dimension(function (d) {
-    //     return d["Grid"];
-    // });
-    // var timeDim = ndx.dimension(function (d) {
-    //    return d["Time"];
-    // });
-    // var pointsDim = ndx.dimension(function (d) {
-    //    return d["Points"];
-    // });
-    //
-    // //Calculate metrics
-    // var numProjectsByPos = positionDim.group();
-    // var numProjectsByDriver = nameDim.group();
-    // var numProjectsByConstructor = constructorDim.group();
-    // var numProjectsByStatus = statusDim.group();
-    // var numProjectsByGrid = gridDim.group();
-    // var numProjectsByTime = timeDim.group();
-    // var numProjectsByPoints = pointsDim.group();
-    //
-    // // var totalDonationsByState = stateDim.group().reduceSum(function (d) {
-    // //     return d["total_donations"];
-    // // });
-    // var stateGroup = stateDim.group();
-    //
-    // var all = ndx.groupAll();
-    // // var totalDonations = ndx.groupAll().reduceSum(function(d) {
-    // //    return d["total_donations"];
-    // // });
-    //
-    // var max_state = totalDonationsByState.top(1)[0].value;
-    //
-    // //Define values (to be used in charts)
-    // var minPos = positionDim.bottom(1)[0]["Pos"];
-    // var maxPos = positionDim.top(1)[0]["Pos"];
-    //
-    // //Charts
-    // var timeChart = dc.barChart("#time-chart");
-    // var resourceTypeChart = dc.rowChart("#resource-type-row-chart");
-    // var povertyLevelChart = dc.rowChart("#poverty-level-row-chart");
-    // var numberProjectsND = dc.numberDisplay("#number-projects-nd");
-    // var totalDonationsND = dc.numberDisplay("#total-donations-nd");
-    // var fundingStatusChart = dc.pieChart("#funding-chart");
-    //
-    // selectField = dc.selectMenu("#menu-select")
-    //     .dimension(stateDim)
-    //     .group(stateGroup);
-    //
-    // numberProjectsND
-    //     .formatNumber(d3.format("d"))
-    //     .valueAccessor(function (d) {
-    //         return d;
-    //     })
-    //     .group(all);
-    //
-    // totalDonationsND
-    //     .formatNumber(d3.format("d"))
-    //     .valueAccessor(function (d) {
-    //         return d;
-    //     })
-    //     .group(totalDonations)
-    //     .formatNumber(d3.format(".3s"));
-    //
-    //
-    // resourceTypeChart
-    //     .width(300)
-    //     .height(250)
-    //     .dimension(nameDim)
-    //     .group(numProjectsByDriver)
-    //     .xAxis().ticks(4);
-    //
-    // povertyLevelChart
-    //     .width(300)
-    //     .height(250)
-    //     .dimension(constructorDim)
-    //     .group(numProjectsByConstructor)
-    //     .xAxis().ticks(4);
-    //
-    // fundingStatusChart
-    //     .height(220)
-    //     .radius(90)
-    //     .innerRadius(40)
-    //     .transitionDuration(1500)
-    //     .dimension(statusDim)
-    //     .group(numProjectsByStatus);
-    //
-    // dc.renderAll();
+
 }
