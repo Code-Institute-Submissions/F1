@@ -12,6 +12,9 @@
 ####Python
 >A python file named F1.py renders with flask an index.html template and builds a web server using pymongo to interact with MongoDB. In this case 3 json mongoDB collections are used. Using the fields defined in the function a for loop iterates over the collections to get the data.  
 
+####Unit tests
+>An example of an unit test is shown in the test_F1.py file. 
+
 ####HTML
 >The 3rd party css/js is linked within index.html in addition to the graph.js file which creates the graphs and a custom css file for dashboard styling. The links to the static files are written in Jinja as this is a Flask framework. Bootstrap is used for changing the horizontal placing of graphs to vertical on small screen sizes. An appropriate background photo is used and the colour of button and dropdown menus is matched for consistency. HTML5 semantic tags are used to layout the webpage.  
 >
