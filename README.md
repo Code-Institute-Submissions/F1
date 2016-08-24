@@ -17,11 +17,11 @@
 >
 
 ####JavaScript
->To enable data visualisation a number of javascript libraries are used. 
+>To enable data visualisation a number of JavaScript libraries are used. 
 + D3.js renders charts in svg which are then passed into the html divs
 - DC.js is used as a wrapper for D3 charts
 * Crossfilter.js is what allows the charts to be modified live by drilling down into the dataset.
-* queue.js is an asynchronous helper library to ensure data is availbale from the api before it is processed.
+* queue.js is an asynchronous helper library to ensure data is available from the api before it is processed.
 - keen.js is a dashboard template library.
 + Bootstrap.js is used in conjunction with keen.js to layout the dashboard
 
@@ -35,5 +35,5 @@ A 3rd party intro.js file is used to attach popup boxes to the graphs to provide
 >Custom css file is used to style the navbar, button, div layout and the colour palette. A 3rd party introjs.css styles the popup boxes for the charts. DC.css styles the charts and keen-dashboard the dashboard layouts. 
 
 ####Hosting
-Heroku is used to host this app. A python package called gunicorn runs the http server for the app on heroku's Ubuntu servers. The requirements.txt contains all the packages required to run the app. Procfiles tell Heroku how to run the app. The app was deployed to Heroku over git. The server used for hosting is mLab MongoDB. The 3 datasets were imported to the MongoDB collection as csv files. 
+>Heroku is used to host this app. A python package called gunicorn runs the http server for the app on heroku's Ubuntu servers. The requirements.txt contains all the packages required to run the app. Procfiles tell Heroku how to run the app. The app was deployed to Heroku over git. The server used for hosting is mLab MongoDB. The 3 datasets were imported to the MongoDB collection as csv files. 
 
