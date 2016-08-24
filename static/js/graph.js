@@ -9,7 +9,7 @@ queue()
     .defer(d3.json, "/api/qualy")
     .await(dovoodoo);
 
-function dovoodoo(error, points, laps, pole){
+function dovoodoo(error, points, laps, pole) {
     makePoints(error, points);
     makeBoxplot(error, laps);
     makePole(error, pole);
@@ -21,7 +21,7 @@ function makeBoxplot(error, Json) {
     var laptimes = Json;
     //Parse out a year from the db date format
     var parseDate = d3.time.format("%Y-%m-%d").parse;
-    Json.forEach(function(d){
+    Json.forEach(function (d) {
         d.date = parseDate(d.date);
         d.Year = d.date.getFullYear();
         d.Driver = d.forename + " " + d.surname;
@@ -29,18 +29,20 @@ function makeBoxplot(error, Json) {
 
     //Create a Crossfilter instance of the min laptimes posted by each driver in the race
     var ndx = crossfilter(laptimes),
-        raceDimension = ndx.dimension(function(d) {return +d.Year;}),
+        raceDimension = ndx.dimension(function (d) {
+            return +d.Year;
+        }),
         lapTimeArrayGroup = raceDimension.group().reduce(
-            function(p,v) {
+            function (p, v) {
                 p.push(v['min_lap_time']);
                 return p;
             },
-            function(p,v) {
+            function (p, v) {
                 p.splice(p.indexOf(v['min_lap_time']), 1);
                 return p;
             },
-            function() {
-                return[];
+            function () {
+                return [];
             }
         );
 //Create a boxPlot
@@ -138,7 +140,7 @@ function makePole(error, Json) {
         var parts = t.split(":");
         var minutes = Math.floor(parts[0]);
         var seconds = parseFloat(parts[1]);
-        var milliseconds =  (60000 * minutes) + (1000 * seconds);
+        var milliseconds = (60000 * minutes) + (1000 * seconds);
         return milliseconds;
     }
 
@@ -194,6 +196,8 @@ function makePole(error, Json) {
         .xUnits(dc.units.ordinal)
         .xAxisLabel("Year")
         .yAxisLabel("milliseconds");
+
+    
 
 
     dc.renderAll();
