@@ -8,7 +8,7 @@ app = Flask(__name__)
 MONGODB_HOST = 'ds015995.mlab.com'
 MONGODB_PORT = 15995
 DBS_NAME = 'heroku_bqvpfh1t'
-MONGO_URI = 'mongodb://root:95ke5312@ds015995.mlab.com:15995/heroku_bqvpfh1t'
+MONGO_URI = 'mongodb://root:********@ds015995.mlab.com:15995/heroku_bqvpfh1t'
 
 @app.route('/')
 def index():
