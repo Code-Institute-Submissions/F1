@@ -2,13 +2,12 @@ from flask import Flask
 from flask import render_template
 from pymongo import MongoClient
 import json
+import os
 
 app = Flask(__name__)
 
-MONGODB_HOST = 'ds015995.mlab.com'
-MONGODB_PORT = 15995
-DBS_NAME = 'heroku_bqvpfh1t'
-MONGO_URI = 'mongodb://root:********@ds015995.mlab.com:15995/heroku_bqvpfh1t'
+MONGODB_URI = os.getenv('MONGODB_URI')
+DBS_NAME = os.getenv('MONGO_DB_NAME','heroku_bqvpfh1t')
 
 @app.route('/')
 def index():
@@ -16,11 +15,11 @@ def index():
 
 @app.route("/api/austria")
 def austrianGP():
-    DBS_NAME = 'heroku_bqvpfh1t'
+
     COLLECTION_NAME = 'austriangp'
     FIELDS = {'Pos': True, 'No': True, 'Driver': True, 'Constructor': True, 'Laps': True, 'Grid': True, 'Time': True,
               'Status': True, 'Points': True, '_id': False}
-    connection = MongoClient(MONGO_URI)
+    connection = MongoClient(MONGODB_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
     projects = collection.  find(projection=FIELDS, limit=20000)
     json_projects = []
@@ -32,10 +31,10 @@ def austrianGP():
 
 @app.route("/api/qualy")
 def poleposition():
-    DBS_NAME = 'heroku_bqvpfh1t'
+
     COLLECTION_NAME = 'poleposition'
     FIELDS = {'raceId': True, 'driverId': True, 'lap_time': True, 'surname': True, 'circuitId': True, 'date': True, 'Circuit': True, '_id': False}
-    connection = MongoClient(MONGO_URI)
+    connection = MongoClient(MONGODB_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
     data = collection.  find(projection=FIELDS, limit=20000)
     json_data = []
@@ -47,10 +46,10 @@ def poleposition():
 
 @app.route("/api/fastestlaps")
 def fastestlap():
-    DBS_NAME = 'heroku_bqvpfh1t'
+
     COLLECTION_NAME = 'fastestlaptimes'
     FIELDS = {'raceId': True, 'forename': True, 'min_lap_time': True, 'surname': True, 'circuitId': True, 'date': True, 'circuit': True, 'min_laptime': True, '_id': False}
-    connection = MongoClient(MONGO_URI)
+    connection = MongoClient(MONGODB_URI)
     collection = connection[DBS_NAME][COLLECTION_NAME]
     laptimes = collection.  find(projection=FIELDS, limit=20000)
     json_laptimes = []
