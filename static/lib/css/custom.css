@@ -41,3 +41,27 @@ background: rgba(119,119,119,0.6);
 p {
     color: white;
 }
+
+#spin {
+    color: red;
+    font-size: 500%;
+}
+
+.sr-only {
+    color: red;
+    font-size: 500%;
+}
+
+#car-status-pie svg {
+    margin: 0 auto;
+    display: block;
+}
+
+div.dc-chart {
+    float: none;
+    text-align: center;
+}
+
+#outer {
+    display: none;
+}

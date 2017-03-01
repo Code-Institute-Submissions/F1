@@ -7,27 +7,11 @@ import os
 app = Flask(__name__)
 
 MONGODB_URI = os.getenv('MONGODB_URI')
-DBS_NAME = os.getenv('MONGO_DB_NAME','heroku_bqvpfh1t')
+DBS_NAME = os.getenv('MONGO_DB_NAME')
 
 @app.route('/')
 def index():
     return render_template("index.html")
-
-@app.route("/api/austria")
-def austrianGP():
-
-    COLLECTION_NAME = 'austriangp'
-    FIELDS = {'Pos': True, 'No': True, 'Driver': True, 'Constructor': True, 'Laps': True, 'Grid': True, 'Time': True,
-              'Status': True, 'Points': True, '_id': False}
-    connection = MongoClient(MONGODB_URI)
-    collection = connection[DBS_NAME][COLLECTION_NAME]
-    projects = collection.  find(projection=FIELDS, limit=20000)
-    json_projects = []
-    for project in projects:
-        json_projects.append(project)
-    json_projects = json.dumps(json_projects)
-    connection.close()
-    return json_projects
 
 @app.route("/api/qualy")
 def poleposition():

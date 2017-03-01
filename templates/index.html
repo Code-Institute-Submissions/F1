@@ -9,10 +9,13 @@
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href= {{ url_for('static', filename='lib/css/keen-dashboards.css') }}>
     <link rel="stylesheet" href= {{ url_for('static', filename='lib/css/dc.css') }}>
-    <link rel="stylesheet" href= {{ url_for('static', filename='lib/css/custom.css') }}>
     <link rel="shortcut icon" href= {{ url_for('static', filename='favicon/favicon.ico') }}>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href= {{ url_for('static', filename='lib/css/custom.css') }}>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.min.js"></script>
 
 </head>
 
@@ -28,7 +31,10 @@
         </button>
     </div>
 </nav>
-
+<div id="spinner">
+    <i id="spin" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+</div>
 <div id="outer" class="container-fluid">
     <div id="overlay"><br>
     </div>
@@ -38,7 +44,7 @@
         <div class="col-sm-6">
             <figure class="chart-wrapper">
                 <div class="chart-title">
-                    Austrian GP 2016 points by constructor
+                    Points by constructor for most recent grand prix
                 </div>
                 <div class="chart-stage">
                     <div id="constructor-points-line" data-step="1"
@@ -61,6 +67,23 @@
             </figure>
         </div>
     </div>
+    {#    <div class="row">#}
+    {##}
+    {#        <div class="col-sm-12">#}
+    {#            <figure class="chart-wrapper">#}
+    {#                <div class="chart-title">#}
+    {#                    Start versus finishing position at most recent grand prix#}
+    {#                </div>#}
+    {#                <div class="chart-stage">#}
+    {#                    <div class="col-md-6">#}
+    {#            <canvas id="chart1" width="300" height="300"></canvas>#}
+    {#        </div>#}
+    {#                </div>#}
+    {#            </figure>#}
+    {#        </div>#}
+    {##}
+    {##}
+    {#    </div>#}
     <div class="row">
 
 
@@ -134,14 +157,15 @@
 </div>
 
 
-
 <hr>
 <footer>
     <p class="small">Data visualisation <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> Niel
         M<sup>c</sup>Ewen. Developed with Ergast Developer API</p>
 </footer>
 
+<script>
 
+</script>
 <script src={{ url_for ('static', filename='lib/js/jquery.min.js') }}></script>
 <script src={{ url_for ('static', filename='lib/js/bootstrap.min.js') }}></script>
 <script src={{ url_for ('static', filename='lib/js/crossfilter.js') }}></script>
