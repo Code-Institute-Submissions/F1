@@ -4,7 +4,7 @@
 
 
 queue()
-    .defer(d3.json, "http://ergast.com/api/f1/current/last/results.json")
+    .defer(d3.json, "/api/austria")
     .defer(d3.json, "/api/fastestlaps")
     .defer(d3.json, "/api/qualy")
     .await(dovoodoo);
@@ -77,62 +77,64 @@ function makeBoxplot(error, Json) {
     dc.renderAll();
 }
 
-function makePoints(error, results) {
+function makePoints(error, projectsJson) {
     //Clean projectsJson data
-    var aPoints = results.MRData.RaceTable.Races[0].Results;
-    console.log(aPoints);
+    // var aPoints = results.MRData.RaceTable.Races[0].Results;
+    // console.log(aPoints);
+    //
+    // var finishers = [];
+    // for (var i = 0; i < 22; i++) {
+    //     var finisher = {};
+    //
+    //     finisher.pos = aPoints[i].position;
+    //     finisher.Driver = aPoints[i].Driver.givenName + " " + aPoints[i].Driver.familyName;
+    //     finisher.Constructor = aPoints[i].Constructor.name;
+    //     if (aPoints[i].FastestLap) {
+    //         finisher.Lap = aPoints[i].FastestLap.lap;
+    //         finisher.Time = aPoints[i].FastestLap.Time.time;
+    //     }
+    //     finisher.Grid = aPoints[i].grid;
+    //     finisher.Status = aPoints[i].status;
+    //     finisher.Points = aPoints[i].points;
+    //     finishers.push(finisher);
+    // }
+    // var pilots = new Array();
+    // for (var i = 0; i < 22; i++) {
+    //     var pilot = {};
+    //     pilot.Driver = finishers[i].Driver;
+    //     var newpilot = $.map(pilot, function(value, index){
+    //     return [value];
+    // });
+    //     pilots.push(newpilot);
+    // }
+    //
+    //
+    // var gridPosn = new Array();
+    // for (var i = 0; i < 22; i++) {
+    //     var gridPos = {};
+    //     gridPos.grid = parseInt(finishers[i].Grid);
+    //     var gposn = $.map(gridPos, function(value, index){
+    //         return [value];
+    //     });
+    //     gridPosn.push(gposn);
+    // }
+    // var startPosn = new Array();
+    // for (var i = 0; i < 22; i++) {
+    //     var startPos = {};
+    //     startPos.pos = parseInt(finishers[i].pos);
+    //     var posn = $.map(gridPos, function(value, index){
+    //         return [value];
+    //     });
+    //     startPosn.push(posn);
+    // }
+    // console.log(startPosn);
+    // console.log(gridPosn);
+    // console.log(pilots);
+   //Clean projectsJson data
+    var raceResults = projectsJson;
 
-    var finishers = [];
-    for (var i = 0; i < 22; i++) {
-        var finisher = {};
-
-        finisher.pos = aPoints[i].position;
-        finisher.Driver = aPoints[i].Driver.givenName + " " + aPoints[i].Driver.familyName;
-        finisher.Constructor = aPoints[i].Constructor.name;
-        if (aPoints[i].FastestLap) {
-            finisher.Lap = aPoints[i].FastestLap.lap;
-            finisher.Time = aPoints[i].FastestLap.Time.time;
-        }
-        finisher.Grid = aPoints[i].grid;
-        finisher.Status = aPoints[i].status;
-        finisher.Points = aPoints[i].points;
-        finishers.push(finisher);
-    }
-    var pilots = new Array();
-    for (var i = 0; i < 22; i++) {
-        var pilot = {};
-        pilot.Driver = finishers[i].Driver;
-        var newpilot = $.map(pilot, function(value, index){
-        return [value];
-    });
-        pilots.push(newpilot);
-    }
-
-
-    var gridPosn = new Array();
-    for (var i = 0; i < 22; i++) {
-        var gridPos = {};
-        gridPos.grid = parseInt(finishers[i].Grid);
-        var gposn = $.map(gridPos, function(value, index){
-            return [value];
-        });
-        gridPosn.push(gposn);
-    }
-    var startPosn = new Array();
-    for (var i = 0; i < 22; i++) {
-        var startPos = {};
-        startPos.pos = parseInt(finishers[i].pos);
-        var posn = $.map(gridPos, function(value, index){
-            return [value];
-        });
-        startPosn.push(posn);
-    }
-    console.log(startPosn);
-    console.log(gridPosn);
-    console.log(pilots);
-
-    //Create a Crossfilter instance
-    var ndx = crossfilter(finishers);
+     //Create a Crossfilter instance
+    var ndx = crossfilter(raceResults);
 
     var statusDim = ndx.dimension(function (d) {
         return d["Status"];
@@ -260,42 +262,42 @@ function makePoints(error, results) {
     //     .xAxis().ticks(d3.scale.ordinal).tickFormat(function (d) {
     //     return d["Driver"]
     // });
-    var ctx1 = document.getElementById("chart1");
-var lineOptions = {
-    scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
-        }]
-    },
-    stacked: true
-};
-var multipleLineData = {
-    datasets: [{
-        data: [gridPosn]
-        ,
-        backgroundColor: "rgba(220,220,220,0.5)",
-        borderColor: "rgba(220,0,0,0.5)",
-        label: 'Grid Position',
-        lineTension: 0,
-        fill: true
-    },
-        {
-            data: [startPosn
-            ],
-            backgroundColor: "rgba(255,206,56,0.5)",
-            label: 'Finishing Position',
-            lineTension: 0
-        }],
-    labels: [pilots]
-};
-
-new Chart(ctx1, {
-    type: 'line',
-    data: multipleLineData,
-    options: lineOptions
-});
+//     var ctx1 = document.getElementById("chart1");
+// var lineOptions = {
+//     scales: {
+//         yAxes: [{
+//             ticks: {
+//                 beginAtZero: true
+//             }
+//         }]
+//     },
+//     stacked: true
+// };
+// var multipleLineData = {
+//     datasets: [{
+//         data: [gridPosn]
+//         ,
+//         backgroundColor: "rgba(220,220,220,0.5)",
+//         borderColor: "rgba(220,0,0,0.5)",
+//         label: 'Grid Position',
+//         lineTension: 0,
+//         fill: true
+//     },
+//         {
+//             data: [startPosn
+//             ],
+//             backgroundColor: "rgba(255,206,56,0.5)",
+//             label: 'Finishing Position',
+//             lineTension: 0
+//         }],
+//     labels: [pilots]
+// };
+//
+// new Chart(ctx1, {
+//     type: 'line',
+//     data: multipleLineData,
+//     options: lineOptions
+// });
 
     dc.renderAll();
 }
